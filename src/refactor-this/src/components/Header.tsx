@@ -10,21 +10,23 @@ const Example = () => {
 
   return (
     <Navbar bg='light' expand='lg'>
-      <Navbar.Brand href='#home'>Photo Sharing App</Navbar.Brand>
-      <Navbar.Toggle aria-controls='basic-navbar-nav' />
-      <Navbar.Collapse id='basic-navbar-nav'>
-        <Nav className='me-auto'>
-          <Link className='nav-link active' to='/fashion'>
-            Fashion
-          </Link>
-          <Link className='nav-link' to='/architecture'>
-            Architecture
-          </Link>
-          <Link className='nav-link' to='/nature'>
-            Nature
-          </Link>
-        </Nav>
-      </Navbar.Collapse>
+      <Container>
+        <Navbar.Brand href='#home'>Photo Sharing App</Navbar.Brand>
+        <Navbar.Toggle aria-controls='basic-navbar-nav' />
+        <Navbar.Collapse id='basic-navbar-nav'>
+          <Nav className='me-auto'>
+            <Link className='nav-link active' to='/fashion'>
+              Fashion
+            </Link>
+            <Link className='nav-link' to='/architecture'>
+              Architecture
+            </Link>
+            <Link className='nav-link' to='/nature'>
+              Nature
+            </Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
     </Navbar>
   );
 };

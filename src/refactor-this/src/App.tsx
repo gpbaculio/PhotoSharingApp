@@ -2,36 +2,34 @@ import { useEffect } from "react";
 import { Container } from "react-bootstrap";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
+import {
+  useQuery,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from "react-query";
 import { Architecture, Fashion, Header, Nature } from "./components";
 
 import Pagination from "react-js-pagination";
-
+const queryClient = new QueryClient();
 function App() {
-  useEffect(() => {
-    fetch("http://localhost:8888/images?category=nature")
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          console.log("result", result);
-        },
-        (error) => {}
-      );
-  }, []);
   return (
-    <Container>
+    <QueryClientProvider client={queryClient}>
       <Router>
         <Header />
-        <Switch>
-          <Route exact path='/(fashion)?'>
-            <Fashion />
-          </Route>
-          <Route exact path='/architecture'>
-            <Architecture />
-          </Route>
-          <Route exact path='/nature'>
-            <Nature />
-          </Route>
-        </Switch>
+        <Container>
+          <Switch>
+            <Route exact path='/(fashion)?'>
+              <Fashion />
+            </Route>
+            <Route exact path='/architecture'>
+              <Architecture />
+            </Route>
+            <Route exact path='/nature'>
+              <Nature />
+            </Route>
+          </Switch>
+        </Container>
         {/* <Pagination
         itemClass='page-item'
         linkClass='page-link'
@@ -42,7 +40,7 @@ function App() {
         onChange={() => {}}
       /> */}
       </Router>
-    </Container>
+    </QueryClientProvider>
   );
 }
 
