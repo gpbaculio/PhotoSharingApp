@@ -4,8 +4,9 @@
   "description": "Valhalla Technical Test",
   "main": "src/refactor-this/index.js",
   "scripts": {
-    "start": "node src/do-not-refactor/server.js | serve src/refactor-this",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "concurrently --kill-others \"npm run server\" \"npm run client\"",
+    "server": "node src/do-not-refactor/server.js",
+    "client": "cd src/refactor-this && npm start"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,7 @@
   },
   "homepage": "https://gitlab.com/Blvnp_Developers/technical-test#readme",
   "dependencies": {
+    "concurrently": "^6.3.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "serve": "^11.3.2"
