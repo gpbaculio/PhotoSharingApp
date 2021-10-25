@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
-import logo from "./logo.svg";
+import { useEffect } from "react";
+import { Container } from "react-bootstrap";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
-import { Header } from "./components";
+import { Architecture, Fashion, Header, Nature } from "./components";
 
 import Pagination from "react-js-pagination";
 
@@ -17,20 +18,21 @@ function App() {
       );
   }, []);
   return (
-    <div className='App'>
-      <Header />
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
-        <p>Edited</p>
-        <a
-          className='App-link'
-          href='https://reactjs.org'
-          target='_blank'
-          rel='noopener noreferrer'>
-          Learn React
-        </a>
-      </header>
-      <Pagination
+    <Container>
+      <Router>
+        <Header />
+        <Switch>
+          <Route exact path='/(fashion)?'>
+            <Fashion />
+          </Route>
+          <Route exact path='/architecture'>
+            <Architecture />
+          </Route>
+          <Route exact path='/nature'>
+            <Nature />
+          </Route>
+        </Switch>
+        {/* <Pagination
         itemClass='page-item'
         linkClass='page-link'
         activePage={1}
@@ -38,8 +40,9 @@ function App() {
         totalItemsCount={450}
         pageRangeDisplayed={5}
         onChange={() => {}}
-      />
-    </div>
+      /> */}
+      </Router>
+    </Container>
   );
 }
 
