@@ -1,45 +1,55 @@
-import React, { useEffect } from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import { Header } from "./components";
-
+import { useCallback, useEffect, useState } from "react";
+import { Container } from "react-bootstrap";
+import { useLocation, useHistory } from "react-router";
 import Pagination from "react-js-pagination";
+import queryString from "query-string";
+
+import { CategoryContent, Header } from "./components";
+import { Context, handleItemsPerPageCount } from "./App.helpers";
 
 function App() {
+  const [page, setPage] = useState(1);
+  const { pathname, search } = useLocation();
+  const category = pathname.replace("/", "") || "fashion";
+  const history = useHistory();
+
+  const changePage = useCallback(
+    (newPage) => {
+      setPage(newPage);
+      history.replace({
+        pathname,
+        search: new URLSearchParams({ page: newPage }).toString(),
+      });
+    },
+    [setPage, history, pathname]
+  );
+
   useEffect(() => {
-    fetch("http://localhost:8888/images?category=nature")
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          console.log("result", result);
-        },
-        (error) => {}
-      );
-  }, []);
+    const parsed = queryString.parse(search);
+    if (parsed && parsed.page) {
+      setPage(Number(parsed.page));
+    } else {
+      changePage(1);
+    }
+  }, [search, changePage]);
+
   return (
-    <div className='App'>
+    <Context.Provider value={{ page, category }}>
       <Header />
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
-        <p>Edited</p>
-        <a
-          className='App-link'
-          href='https://reactjs.org'
-          target='_blank'
-          rel='noopener noreferrer'>
-          Learn React
-        </a>
-      </header>
-      <Pagination
-        itemClass='page-item'
-        linkClass='page-link'
-        activePage={1}
-        itemsCountPerPage={10}
-        totalItemsCount={450}
-        pageRangeDisplayed={5}
-        onChange={() => {}}
-      />
-    </div>
+      <Container>
+        <CategoryContent />
+        <Pagination
+          innerClass='pagination justify-content-center mt-2'
+          itemClass='page-item'
+          linkClass='page-link'
+          activePage={page}
+          itemsCountPerPage={9}
+          totalItemsCount={handleItemsPerPageCount(category)}
+          pageRangeDisplayed={5}
+          onChange={changePage}
+        />
+      </Container>
+    </Context.Provider>
   );
 }
 
