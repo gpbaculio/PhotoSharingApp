@@ -27,7 +27,9 @@ const CategoryRow = ({ row }: CategoryRowProps) => {
       ) : (
         data!.map(({ url, name }, i) => {
           const urlImg = `${
-            process.env.NODE_ENV === "development" ? url : url.split("33367")[1]
+            process.env.NODE_ENV === "development"
+              ? url
+              : `https://photo-share-gpb.herokuapp.com/${url.split("33367")[1]}`
           }`;
           return (
             <StyledCol key={`${i}:${urlImg}`} xs={4}>
