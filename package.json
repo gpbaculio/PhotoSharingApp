@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Valhalla Technical Test",
   "main": "src/refactor-this/index.js",
+  "engines": {
+    "node": "12.21.0"
+  },
   "scripts": {
     "dev": "concurrently --kill-others \"npm run server\" \"npm run client\"",
     "start": "npm run server",
