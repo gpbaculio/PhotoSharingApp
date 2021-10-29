@@ -1,11 +1,12 @@
 import classNames from "classnames";
 import { Row } from "react-bootstrap";
+import styled from "styled-components";
 import { useQuery } from "react-query";
 
 import { useCategory } from "../App.helpers";
-import { StyledCol, StyledImg } from "./CategoryContent";
+import { StyledCol } from "./CategoryContent";
 import { fetchCategoryImages } from "./CategoryRow.helpers";
-import { RowLoader } from "./RowLoader";
+import ColLoader from "./ColLoader";
 
 interface CategoryRowProps {
   row: number;
@@ -25,7 +26,11 @@ const CategoryRow = ({ row, categoryPage }: CategoryRowProps) => {
   return (
     <Row className={classNames("mb-4", { "mt-4": row === 1 })}>
       {isFetching ? (
-        <RowLoader />
+        <>
+          <ColLoader />
+          <ColLoader />
+          <ColLoader />
+        </>
       ) : (
         data!.map(({ url, name }, i) => (
           <StyledCol key={`${i}:${url}`} xs={4}>
@@ -36,5 +41,11 @@ const CategoryRow = ({ row, categoryPage }: CategoryRowProps) => {
     </Row>
   );
 };
+
+const StyledImg = styled.img`
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+`;
 
 export default CategoryRow;

@@ -16,15 +16,9 @@ const CategoryContent = () => {
   );
 };
 
+export default CategoryContent;
+
 export const StyledCol = styled(Col)`
   display: flex;
   justify-content: center;
 `;
-
-export const StyledImg = styled.img`
-  width: 100%;
-  height: 380px;
-  object-fit: cover;
-`;
-
-export default CategoryContent;
