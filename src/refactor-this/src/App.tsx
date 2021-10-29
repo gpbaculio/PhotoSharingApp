@@ -21,7 +21,7 @@ function App() {
         search: new URLSearchParams({ page: newPage }).toString(),
       });
     },
-    [setPage, history.replace, pathname]
+    [setPage, history, pathname]
   );
 
   useEffect(() => {

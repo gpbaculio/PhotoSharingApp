@@ -4,7 +4,7 @@
   "description": "Valhalla Technical Test",
   "main": "src/refactor-this/index.js",
   "scripts": {
-    "dev": "concurrently --kill-others \"npm run server\" \"npm run client\"",
+    "start": "concurrently --kill-others \"npm run server\" \"npm run client\"",
     "server": "node src/do-not-refactor/server.js",
     "client": "cd src/refactor-this && npm start"
   },

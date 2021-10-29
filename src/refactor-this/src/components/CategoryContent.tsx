@@ -18,4 +18,7 @@ export default CategoryContent;
 export const StyledCol = styled(Col)`
   display: flex;
   justify-content: center;
+  &:hover img {
+    opacity: 0.5;
+  }
 `;
