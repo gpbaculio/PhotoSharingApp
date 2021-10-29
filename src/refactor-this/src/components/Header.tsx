@@ -1,5 +1,6 @@
 import { Navbar, Container, Nav } from "react-bootstrap";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router";
+import { Link } from "react-router-dom";
 import classNames from "classnames";
 
 const HeaderLink = ({ label, to }: { label: string; to: string }) => {
@@ -7,7 +8,8 @@ const HeaderLink = ({ label, to }: { label: string; to: string }) => {
   return (
     <Link
       className={classNames("nav-link", { active: pathname === to })}
-      to={to}>
+      to={to}
+      data-testid={`nav:${to}`}>
       {label}
     </Link>
   );
