@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { Container } from "react-bootstrap";
-import { useLocation } from "react-router";
+import { useLocation } from "react-router-dom";
 import Pagination from "react-js-pagination";
 
 import { CategoryContent, Header } from "./components";

@@ -3,18 +3,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import { BrowserRouter as Router } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
-import { QueryClient, QueryClientProvider } from "react-query";
-const queryClient = new QueryClient();
+import AppWrapper from "./AppWrapper";
 
 ReactDOM.render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <Router>
-        <App />
-      </Router>
-    </QueryClientProvider>
+    <AppWrapper>
+      <App />
+    </AppWrapper>
   </React.StrictMode>,
   document.getElementById("root")
 );
