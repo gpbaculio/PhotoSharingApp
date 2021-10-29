@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import classNames from "classnames";
 
 const HeaderLink = ({ label, to }: { label: string; to: string }) => {
-  const location = useLocation();
+  const { pathname } = useLocation();
   return (
     <Link
-      className={classNames("nav-link", { active: location.pathname === to })}
+      className={classNames("nav-link", { active: pathname === to })}
       to={to}>
       {label}
     </Link>
