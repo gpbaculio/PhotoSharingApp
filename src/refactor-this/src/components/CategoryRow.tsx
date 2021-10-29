@@ -38,6 +38,9 @@ const StyledImg = styled.img`
   width: 100%;
   height: 380px;
   object-fit: cover;
+  &:hover {
+    opacity: 0.5;
+  }
 `;
 
 export default CategoryRow;

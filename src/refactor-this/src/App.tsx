@@ -2,29 +2,36 @@ import { useCallback, useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { useLocation, useHistory } from "react-router";
 import Pagination from "react-js-pagination";
+import queryString from "query-string";
 
 import { CategoryContent, Header } from "./components";
 import { Context, handleItemsPerPageCount } from "./App.helpers";
 
 function App() {
-  const { pathname } = useLocation();
+  const [page, setPage] = useState(1);
+  const { pathname, search } = useLocation();
   const category = pathname.replace("/", "") || "fashion";
   const history = useHistory();
-  const [page, setPage] = useState(1);
+
   const changePage = useCallback(
     (newPage) => {
       setPage(newPage);
       history.replace({
         pathname,
-        search: `${new URLSearchParams({ test: "test" })}`,
+        search: new URLSearchParams({ page: newPage }).toString(),
       });
     },
     [setPage, history.replace, pathname]
   );
 
   useEffect(() => {
-    setPage(1);
-  }, [pathname, setPage]);
+    const parsed = queryString.parse(search);
+    if (parsed && parsed.page) {
+      setPage(Number(parsed.page));
+    } else {
+      changePage(1);
+    }
+  }, [search, changePage]);
 
   return (
     <Context.Provider value={{ page, category }}>
