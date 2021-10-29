@@ -2,14 +2,6 @@ import { createContext, useCallback, useContext, useState } from "react";
 import { Container } from "react-bootstrap";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { useHistory, useLocation, useRouteMatch } from "react-router";
-import qs from "query-string";
-import "./App.css";
-import {
-  useQuery,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from "react-query";
 import { Architecture, Fashion, Header, Nature } from "./components";
 
 import Pagination from "react-js-pagination";
