@@ -1,28 +1,20 @@
 import classNames from "classnames";
 import { Row } from "react-bootstrap";
 import styled from "styled-components";
-import { useQuery } from "react-query";
 
 import { useCategory } from "../App.helpers";
 import { StyledCol } from "./CategoryContent";
-import { fetchCategoryImages } from "./CategoryRow.helpers";
+import { useFetchCategoryImages } from "./CategoryRow.helpers";
 import ColLoader from "./ColLoader";
 
 interface CategoryRowProps {
   row: number;
-  categoryPage: number;
 }
 
-const CategoryRow = ({ row, categoryPage }: CategoryRowProps) => {
-  const { category } = useCategory();
-  const { data, isFetching } = useQuery(
-    [category, categoryPage],
-    () => fetchCategoryImages(categoryPage, category),
-    {
-      keepPreviousData: true,
-      staleTime: Infinity,
-    }
-  );
+const CategoryRow = ({ row }: CategoryRowProps) => {
+  const { category, page } = useCategory();
+  const offset = (page - 1) * 3;
+  const { data, isFetching } = useFetchCategoryImages(category, offset + row);
   return (
     <Row className={classNames("mb-4", { "mt-4": row === 1 })}>
       {isFetching ? (

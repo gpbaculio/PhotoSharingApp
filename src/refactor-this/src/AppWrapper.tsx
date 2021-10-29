@@ -11,7 +11,8 @@ interface AppWrapperProps {
 }
 
 const AppWrapper = ({ children }: AppWrapperProps) => (
-  <ErrorBoundary>
+  <ErrorBoundary
+    fallback={<p data-testid='error-msg'>Something went wrong.</p>}>
     <QueryClientProvider client={queryClient}>
       <Router>{children}</Router>
     </QueryClientProvider>

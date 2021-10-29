@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useQuery } from "react-query";
 
 interface ProjectType {
   category: string;
@@ -12,3 +13,9 @@ export const fetchCategoryImages = async (page = 1, category: string) => {
   );
   return data;
 };
+
+export const useFetchCategoryImages = (category: string, page: number) =>
+  useQuery([category, page], () => fetchCategoryImages(page, category), {
+    keepPreviousData: true,
+    staleTime: Infinity,
+  });

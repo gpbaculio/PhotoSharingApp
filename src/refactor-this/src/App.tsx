@@ -1,6 +1,6 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router";
 import Pagination from "react-js-pagination";
 
 import { CategoryContent, Header } from "./components";
@@ -9,13 +9,23 @@ import { Context, handleItemsPerPageCount } from "./App.helpers";
 function App() {
   const { pathname } = useLocation();
   const category = pathname.replace("/", "") || "fashion";
+  const history = useHistory();
   const [page, setPage] = useState(1);
   const changePage = useCallback(
     (newPage) => {
       setPage(newPage);
+      history.replace({
+        pathname,
+        search: `${new URLSearchParams({ test: "test" })}`,
+      });
     },
-    [setPage]
+    [setPage, history.replace, pathname]
   );
+
+  useEffect(() => {
+    setPage(1);
+  }, [pathname, setPage]);
+
   return (
     <Context.Provider value={{ page, category }}>
       <Header />

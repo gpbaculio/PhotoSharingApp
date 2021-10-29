@@ -10,7 +10,6 @@ class ErrorBoundary extends Component<ErrorBoundaryProps> {
   static getDerivedStateFromError = (
     error: ErrorBoundary
   ): Record<string, unknown> => {
-    console.log("ERRORRR: ", error);
     return {
       hasError: true,
       error,
