@@ -4,9 +4,11 @@
   "description": "Valhalla Technical Test",
   "main": "src/refactor-this/index.js",
   "scripts": {
-    "start": "concurrently --kill-others \"npm run server\" \"npm run client\"",
+    "dev": "concurrently --kill-others \"npm run server\" \"npm run client\"",
+    "start": "npm run server",
     "server": "node src/do-not-refactor/server.js",
-    "client": "cd src/refactor-this && npm start"
+    "client": "cd src/refactor-this && npm start",
+    "heroku-postbuild": "cd src/do-not-refactor && npm install && cd ../refactor-this && npm install && npm run build"
   },
   "repository": {
     "type": "git",
