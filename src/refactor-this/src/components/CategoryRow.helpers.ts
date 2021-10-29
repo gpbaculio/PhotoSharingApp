@@ -9,7 +9,7 @@ interface ProjectType {
 
 export const fetchCategoryImages = async (page = 1, category: string) => {
   const { data } = await axios.get<ProjectType[]>(
-    `http://localhost:8888/images?category=${category}&page=${page}`
+    `https://photo-share-gpb.herokuapp.com:80/images?category=${category}&page=${page}`
   );
   return data;
 };
