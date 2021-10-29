@@ -9,7 +9,9 @@ interface ProjectType {
 
 export const fetchCategoryImages = async (page = 1, category: string) => {
   const { data } = await axios.get<ProjectType[]>(
-    `/images?category=${category}&page=${page}`
+    process.env.NODE_ENV === "development"
+      ? `http://localhost:8888/images?category=${category}&page=${page}`
+      : `/images?category=${category}&page=${page}`
   );
   return data;
 };
