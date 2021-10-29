@@ -26,10 +26,14 @@ const CategoryRow = ({ row }: CategoryRowProps) => {
         </>
       ) : (
         data!.map(({ url, name }, i) => {
+          console.log("url", url);
+          console.log('url.split("33367")[1]', url.split("/static")[1]);
           const urlImg = `${
             process.env.NODE_ENV === "development"
               ? url
-              : `https://photo-share-gpb.herokuapp.com/${url.split("33367")[1]}`
+              : `https://photo-share-gpb.herokuapp.com/static/${
+                  url.split("/static")[1]
+                }`
           }`;
           return (
             <StyledCol key={`${i}:${urlImg}`} xs={4}>
