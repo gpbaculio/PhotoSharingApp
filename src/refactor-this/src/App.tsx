@@ -1,24 +1,11 @@
-import { createContext, useCallback, useContext, useState } from "react";
+import { useCallback, useState } from "react";
 import { Container } from "react-bootstrap";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { useHistory, useLocation, useRouteMatch } from "react-router";
-import { Architecture, Fashion, Header, Nature } from "./components";
-
+import { useLocation } from "react-router";
 import Pagination from "react-js-pagination";
-const Context = createContext<CategoryContext | null>(null);
 
-export const useCategory = () => {
-  const ctx = useContext(Context);
-  if (ctx === null) {
-    throw new Error("No provider found");
-  }
-  return ctx;
-};
+import { CategoryContent, Header } from "./components";
+import { Context, handleItemsPerPageCount } from "./App.helpers";
 
-interface CategoryContext {
-  category: string;
-  page: number;
-}
 function App() {
   const { pathname } = useLocation();
   const category = pathname.replace("/", "") || "fashion";
@@ -33,24 +20,14 @@ function App() {
     <Context.Provider value={{ page, category }}>
       <Header />
       <Container>
-        <Switch>
-          <Route exact path='/(fashion)?'>
-            <Fashion />
-          </Route>
-          <Route exact path='/architecture'>
-            <Architecture />
-          </Route>
-          <Route exact path='/nature'>
-            <Nature />
-          </Route>
-        </Switch>
+        <CategoryContent />
         <Pagination
           innerClass='pagination justify-content-center mt-2'
           itemClass='page-item'
           linkClass='page-link'
           activePage={page}
-          itemsCountPerPage={10}
-          totalItemsCount={450}
+          itemsCountPerPage={9}
+          totalItemsCount={handleItemsPerPageCount(category)}
           pageRangeDisplayed={5}
           onChange={changePage}
         />
