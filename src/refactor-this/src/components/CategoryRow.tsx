@@ -25,14 +25,19 @@ const CategoryRow = ({ row }: CategoryRowProps) => {
           <ColLoader />
         </>
       ) : (
-        data!.map(({ url, name }, i) => (
-          <StyledCol key={`${i}:${url.split("33367")[1]}`} xs={4}>
-            <StyledImg src={`${url.split("33367")[1]}`} alt={name} />
-            <StyledBtn onClick={() => window.open(url, "_blank")}>
-              Download
-            </StyledBtn>
-          </StyledCol>
-        ))
+        data!.map(({ url, name }, i) => {
+          const urlImg = `${
+            process.env.NODE_ENV === "development" ? url : url.split("33367")[1]
+          }`;
+          return (
+            <StyledCol key={`${i}:${urlImg}`} xs={4}>
+              <StyledImg src={urlImg} alt={name} />
+              <StyledBtn onClick={() => window.open(url, "_blank")}>
+                Download
+              </StyledBtn>
+            </StyledCol>
+          );
+        })
       )}
     </Row>
   );
