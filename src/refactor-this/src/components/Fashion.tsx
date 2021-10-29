@@ -72,7 +72,7 @@ const Fashion = () => {
           </>
         )}
       </StyledRow>
-      <StyledRow className='pt-4'>
+      <StyledRow>
         {data?.map(({ url, name }, i) => (
           <StyledCol key={`${i}:${url}`} xs={4}>
             <StyledImg src={url} alt={name} />
@@ -110,7 +110,7 @@ const Fashion = () => {
           </>
         )}
       </StyledRow>
-      <StyledRow className='pt-4'>
+      <StyledRow>
         {data?.map(({ url, name }, i) => (
           <StyledCol key={`${i}:${url}`} xs={4}>
             <StyledImg src={url} alt={name} />
