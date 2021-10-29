@@ -15,18 +15,6 @@ app.use(cors());
 // Serve image files
 app.use("/static", express.static(path.join(__dirname, "public")));
 
-const staticPath = path.join(__dirname, "..", "refactor-this", "build");
-const publicPath = path.join(
-  __dirname,
-  "..",
-  "refactor-this",
-  "build",
-  "index.html"
-);
-
-app.use(express.static(staticPath));
-app.get("/*", (_, res) => res.sendFile(publicPath));
-
 /**
  * Retrieve a list of images with response limit of 3 items only
  * @param  {('nature'|'architecture'|'fashion')}  category  Image category
@@ -43,6 +31,17 @@ app.get("/images", (req, res) => {
     res.send(images);
   }, 3000);
 });
+const staticPath = path.join(__dirname, "..", "refactor-this", "build");
+const publicPath = path.join(
+  __dirname,
+  "..",
+  "refactor-this",
+  "build",
+  "index.html"
+);
+
+app.use(express.static(staticPath));
+app.get("/*", (_, res) => res.sendFile(publicPath));
 
 app.listen(port, () => {
   console.log(`Photo Sharing App API listening at http://localhost:${port}`);
