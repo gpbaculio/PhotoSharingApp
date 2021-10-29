@@ -26,8 +26,8 @@ const CategoryRow = ({ row }: CategoryRowProps) => {
         </>
       ) : (
         data!.map(({ url, name }, i) => (
-          <StyledCol key={`${i}:${url}`} xs={4}>
-            <StyledImg src={url} alt={name} />
+          <StyledCol key={`${i}:${url.split("33367")[1]}`} xs={4}>
+            <StyledImg src={`${url.split("33367")[1]}`} alt={name} />
             <StyledBtn onClick={() => window.open(url, "_blank")}>
               Download
             </StyledBtn>
